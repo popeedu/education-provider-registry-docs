@@ -39,3 +39,22 @@ Scenario: Establishments with spaces in their name can be searched
   Given an establishment named "Sutton Grammar" exists
   When the user searches for " "
   Then the establishment "Sutton Grammar" is returned
+
+@search-name-status
+Scenario: Exclude establishments based on status
+Given the following establishments exist:
+    | Establishment Name         | Establishment Status          |
+    | Oakley Vale Primary School | Closed                        |
+    | King Ethelbert School      | Open                          |
+    | Cornerstone School         | Pending approval              |
+    | Open Arms School           | Proposed to open              |
+    | The Future Tech School     | Open, but proposed to close   |
+When a search is made using the term "<term>"
+And "<status>" establishments are included
+Then "<results count>" establishments are returned in the search
+  | Example                    | Term        | Status    | Result Count |
+  | Only open establishments   | school      | only open | 2            |
+  | All establishments         | school      | all       | 4            |
+  | Non-exposed status - open  | Cornerstone | only open | 0            |
+  | Non-exposed status - all   | Cornerstone | all       | 0            
+
