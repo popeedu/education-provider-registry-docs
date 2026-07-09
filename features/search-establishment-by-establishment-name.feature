@@ -56,5 +56,5 @@ Then "<results count>" establishments are returned in the search
   | Only open establishments   | school      | only open | 2            |
   | All establishments         | school      | all       | 4            |
   | Non-exposed status - open  | Cornerstone | only open | 0            |
-  | Non-exposed status - all   | Cornerstone | all       | 0            
+  | Non-exposed status - all   | Cornerstone | all       | 0            |
 
